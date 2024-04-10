@@ -1,6 +1,6 @@
 # Arai60
 ## LinkedList
-- [ ] [141. Linked List Cycle]
+- [141. Linked List Cycle](https://github.com/sakupan102/arai60-practice/pull/1)
 
 ## Stack
 
