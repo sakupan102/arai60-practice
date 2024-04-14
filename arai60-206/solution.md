@@ -9,9 +9,9 @@
 #         self.next = next
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        reversed_lsit = None
+        reversed_list = None
         while head:
-            reversedList = ListNode(head.val, reversed_list)
+            reversed_list = ListNode(head.val, reversed_list)
             head = head.next
         return reversed_list
 ```
@@ -81,4 +81,5 @@ class Solution:
             current.next = reversed_list
             reversed_list = current
             current = next_pointer
+        return reversed_list
 ```
