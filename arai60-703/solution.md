@@ -8,6 +8,7 @@ class KthLargest:
         self.limit = k
         for num in nums:
             self.add(num)
+
     def add(self, number):
         heapq.heappush(self.top_k_nums, number)
         if len(self.top_k_nums) > self.limit:
@@ -27,6 +28,7 @@ class KthLargest:
         self.limit = k
         for num in nums:
             self.add(num)
+
     def add(self, num):
         heapq.heappush(self.top_nums, num)
         if len(self.top_nums) > self.limit:
@@ -42,6 +44,7 @@ class KthLargest:
         self.limit = k
         for num in nums:
             self.add(num)
+            
     def add(self, num):
         heapq.heappush(self.top_k_nums, num)
         if len(self.top_k_nums) > self.limit:
