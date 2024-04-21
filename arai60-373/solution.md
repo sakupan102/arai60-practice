@@ -16,7 +16,7 @@ class Solution:
             num2 = nums2[nums2_index]
             num1 = added_val - num2
             k_smallest_pair.append([num1, num2])
-            if not nums2_index + 1 < len(nums2):
+            if nums2_index + 1 >= len(nums2):
                 continue
             new_index = nums2_index + 1
             heapq.heappush(min_num_pair, (num1 + nums2[new_index], new_index))
