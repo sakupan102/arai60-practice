@@ -58,6 +58,27 @@ class Solution:
         return top_k_frequent_nums
 ```
 
+# 4th
+- 変数名に(-count, num)が入っていることを説明するようにした。
+- 変数宣言は実際に使う直前で宣言するように修正した。
+```py
+from collections import defaultdict
+import heapq
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        num_to_count = defaultdict(int)
+        for num in nums:
+            num_to_count[num] += 1
+        minus_count_and_num_heap = []
+        for num, count in num_to_count.items():
+            heapq.heappush(minus_count_and_num_heap, (-count, num))
+        top_k_frequent_nums = []
+        for _ in range(k):
+            _, num = heapq.heappop(minus_count_and_num_heap)
+            top_k_frequent_nums.append(num)
+        return top_k_frequent_nums
+```
+
 # defaultdictの実装
 - クラスのメンバにdictを持たせて実装
 - new_dict[3]はnew_dict.__getitem__(3)のsyntax sugar
