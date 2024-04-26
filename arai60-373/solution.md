@@ -79,3 +79,27 @@ class Solution:
                 heapq.heappush(candidates, (nums1[index1] + nums2[index2 + 1], index1, index2 + 1))
         return minimum_num_pairs
 ```
+# 4th
+```py
+import heapq
+class Solution:
+    def kSmallestPairs(self, nums1: List[int], nums2: List[int], k: int) -> List[List[int]]:
+        added = set((0, 0))
+        def need_to_add(index1, index2):
+            if index1 >= len(nums1) or index2 >= len(nums2):
+                return False
+            if index1 == 0 or index2 == 0:
+                return True
+            return (index1 - 1, index2) in added and (index1, index2 - 1) in added
+        min_num_pairs = []
+        candidate = [(nums1[0] + nums2[0], 0, 0)]
+        while len(min_num_pairs) < k:
+            _, index1, index2 = heapq.heappop(candidate)
+            min_num_pairs.append([nums1[index1], nums2[index2]])
+            added.add((index1, index2))
+            if need_to_add(index1 + 1, index2):
+                heapq.heappush(candidate, (nums1[index1 + 1] + nums2[index2], index1 + 1, index2))
+            if need_to_add(index1, index2 + 1):
+                heapq.heappush(candidate, (nums1[index1] + nums2[index2 + 1], index1, index2 + 1))
+        return min_num_pairs
+```
