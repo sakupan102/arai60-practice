@@ -50,5 +50,5 @@ class Solution:
             prefix_sum += num
             number_of_subarrays += prefix_sum_to_count[prefix_sum - k]
             prefix_sum_to_count[prefix_sum] += 1
-        return number_of_subarrays d
+        return number_of_subarrays 
 ```
