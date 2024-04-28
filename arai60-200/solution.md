@@ -138,3 +138,36 @@ class Solution:
                     visit_island(col, row)
         return number_of_islands       
 ```
+# 4th
+```py
+class Solution:
+    def numIslands(self, grid: List[List[str]]) -> int:
+        num_rows = len(grid)
+        num_cols = len(grid[0])
+        visited = [[False] * num_cols for _ in range(num_rows)]
+
+        def inside_grid(row, col):
+            return 0 <= row < num_rows and 0 <= col < num_cols
+
+        def is_island(row, col):
+            return grid[row][col] == "1"
+
+        def visit_island(row, col):
+            if not is_island(row, col) or visited[row][col]:
+                return
+            visited[row][col] = True
+            directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+            for direction in directions:
+                new_row = row + direction[0]
+                new_col = col + direction[1]
+                if inside_grid(new_row, new_col):
+                    visit_island(new_row, new_col)
+
+        num_islands = 0
+        for row in range(num_rows):
+            for col in range(num_cols):
+                if is_island(row, col) and not visited[row][col]:
+                    num_islands += 1
+                    visit_island(row, col)
+        return num_islands                     
+```
