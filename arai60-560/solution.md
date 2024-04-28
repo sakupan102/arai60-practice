@@ -29,13 +29,13 @@ class Solution:
     def subarraySum(self, nums: List[int], k: int) -> int:
         prefix_sum_to_count = defaultdict(int)
         prefix_sum_to_count[0] = 1
-        number_of_subarrays = 0
+        number_of_subarray = 0
         prefix_sum = 0
         for num in nums:
             prefix_sum += num
-            number_of_subarrays += prefix_sum_to_count[prefix_sum - k]
+            number_of_subarray += prefix_sum_to_count[prefix_sum - k]
             prefix_sum_to_count[prefix_sum] += 1
-        return number_of_subarrays 
+        return number_of_subarray 
 ``` 
 # 3rd
 ```py
@@ -44,11 +44,11 @@ class Solution:
     def subarraySum(self, nums: List[int], k: int) -> int:
         prefix_sum_to_count = defaultdict(int)
         prefix_sum_to_count[0] = 1
-        number_of_subarrays = 0
+        number_of_subarray = 0
         prefix_sum = 0
         for num in nums:
             prefix_sum += num
-            number_of_subarrays += prefix_sum_to_count[prefix_sum - k]
+            number_of_subarray += prefix_sum_to_count[prefix_sum - k]
             prefix_sum_to_count[prefix_sum] += 1
-        return number_of_subarrays 
+        return number_of_subarray 
 ```
