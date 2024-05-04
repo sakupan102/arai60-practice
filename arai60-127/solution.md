@@ -134,6 +134,47 @@ class Solution:
         return 0
         
 ```
+# 4th
+```py
+from collections import deque, defaultdict
+class Solution:
+    def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
+        wordList.append(beginWord)
+        begin_word_index = len(wordList) - 1
+
+        def is_adjacent_word(word1, word2):
+            num_different_chars = 0
+            for i in range(len(word1)):
+                if num_different_chars > 1:
+                    return False
+                if word1[i] != word2[i]:
+                    num_different_chars += 1
+            return num_different_chars == 1
+        
+        def make_adjacent_word_graph():
+            index_to_adjacent_indices = defaultdict(list)
+            for i in range(len(wordList) - 1):
+                for j in range(i + 1, len(wordList)):
+                    if is_adjacent_word(wordList[i], wordList[j]):
+                        index_to_adjacent_indices[i].append(j)
+                        index_to_adjacent_indices[j].append(i)
+            return index_to_adjacent_indices
+
+        index_to_adjacent_indices = make_adjacent_word_graph()
+        node_to_visit_and_len_path = deque([(begin_word_index, 1)])
+        visited = [False] * len(wordList)
+        visited[begin_word_index] = True
+        while node_to_visit_and_len_path:
+            index, len_path = node_to_visit_and_len_path.popleft()
+            if wordList[index] == endWord:
+                return len_path
+            for next_index in index_to_adjacent_indices[index]:
+                if not visited[next_index]:
+                    visited[next_index] = True
+                    node_to_visit_and_len_path.append((next_index, len_path + 1))
+        return 0
+            
+```
 # TLEした解答
 - wordどうしが隣り合っているかどうか判定する箇所で時間がかかったと推測
 - distance(word1, word2) = distance(word2, word1)なので一つにまとめたい。
