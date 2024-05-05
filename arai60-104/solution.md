@@ -107,3 +107,34 @@ class Solution:
                     set_left_depth(left_depth)
                     continue
 ```
+
+# stack + loopでの解法2nd
+ミュータブルなオブジェクトを用いて呼び出し元にleft_depthとright_depthを伝えている
+```py
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def maxDepth(self, root: Optional[TreeNode]) -> int:
+        if not root: 
+            return 0
+        stack = [("go", (root,None, [None], [None], [None]))] # (node, direction, depth, left_depth, right_depth)
+        while stack:
+            go_back_flag, args = stack.pop()
+            if go_back_flag == "go":
+                node, direction, depth_ref, left_depth_ref, right_depth_ref = args
+                if not node:
+                    depth_ref[0] = 0
+                    continue
+                stack.append(("back", args))
+                stack.append(("go", (node.left, "left", left_depth_ref,[None], [None])))
+                stack.append(("go", (node.right, "right", right_depth_ref, [None], [None])))
+            if go_back_flag == "back":
+                node, direction, depth_ref, left_depth_ref, right_depth_ref = args
+                depth_ref[0] = max(left_depth_ref[0], right_depth_ref[0]) + 1
+                if not direction:
+                    return depth_ref[0]
+```
