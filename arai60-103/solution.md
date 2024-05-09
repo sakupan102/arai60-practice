@@ -1,4 +1,6 @@
 # 1st
+- zigzag_ordered_node_valsにするべきだった
+- nodesではなくsame_level_nodesにした方が良かった
 ```py
 class Solution:
     def zigzagLevelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
