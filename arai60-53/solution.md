@@ -27,6 +27,8 @@ class Solution:
 ```
 # 2nd
 - prefix_sumはmin_prefix_sumとは一つずれているのでしょうがない気がするがprefix_sumとmin_prefix_sumが違うところで更新されているのは少し違和感
+- https://discord.com/channels/1084280443945353267/1206101582861697046/1207405733667410051
+  - kadaneのアルゴリズムでも解ける
 ```py
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
