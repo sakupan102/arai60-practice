@@ -58,3 +58,16 @@ class Solution:
             max_sum = max(max_sum, prefix_sum - min_prefix_sum)
         return max_sum
 ```
+
+# 4th
+kadaneのアルゴリズムを用いた解法で解いた
+```py
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        max_sum = nums[0]
+        current_sum = 0
+        for i in range(len(nums)):
+            current_sum = max(current_sum, 0) + nums[i]
+            max_sum = max(max_sum, current_sum)
+        return max_sum
+```
