@@ -73,3 +73,18 @@ class Solution:
                 same_row_num_ways[col] = same_row_num_ways[col - 1] + same_row_num_ways[col]
         return same_row_num_ways[-1]
 ```
+
+# 4th
+cacheを用いた再帰
+```py
+from functools import cache
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        @cache
+        def combinations(n, k):
+            if n == 0 or k == 0 or n == k:
+                return 1
+            return combinations(n - 1, k) + combinations(n - 1, k - 1)
+        
+        return combinations(m + n - 2, m - 1)
+```
