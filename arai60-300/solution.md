@@ -54,3 +54,64 @@ class Solution:
             LIS_length[i] = get_LIS_length_before_target_index(i) + 1
         return max(LIS_length)
 ```
+
+# 二分探査を用いたO(N log(N))の解法
+## 1st
+- `if tail_nums[middle] == num`のときmiddleをleftとりrightに代入させてループを脱出させるのはやや不自然か
+```py
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        inf = math.inf
+        tail_nums = [inf] * len(nums)
+        for num in nums:
+            left = 0
+            right = len(nums) - 1
+            while left < right:
+                middle = (left + right) // 2
+                if tail_nums[middle] == num:
+                    left, right = middle, middle
+                    continue
+                if num < tail_nums[middle]:
+                    right = middle
+                    continue
+                left = middle + 1
+            tail_nums[right] = num
+
+        len_subsequence = 0
+        while len_subsequence < len(tail_nums) and tail_nums[len_subsequence] < inf:
+            len_subsequence += 1
+        return len_subsequence
+```
+
+# 2nd
+- while else文を用いて条件分岐後の処理を分けた。
+> 頭から舐めていって k 番目まで見たときに、
+「nums[k] までを使って、すべての長さ1のシーケンスを考えたときに、そのシーケンスの一番お尻の最小値」
+「nums[k] までを使って、すべての長さ2のシーケンスを考えたときに、そのシーケンスの一番お尻の最小値」
+「nums[k] までを使って、すべての長さ3のシーケンスを考えたときに、そのシーケンスの一番お尻の最小値」
+……
+というものです。これは昇順に並んでいるはずで、nums[k + 1] を使って、これを更新することは可能ですね。
+```py
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        inf = math.inf
+        tail_nums = [inf] * len(nums)
+        for num in nums:
+            left = 0
+            right = len(nums) - 1
+            while left < right:
+                middle = (left + right) // 2
+                if tail_nums[middle] == num:
+                    break
+                if num < tail_nums[middle]:
+                    right = middle
+                    continue
+                left = middle + 1
+            else:
+                tail_nums[right] = num
+
+        len_subsequence = 0
+        while len_subsequence < len(tail_nums) and tail_nums[len_subsequence] < inf:
+            len_subsequence += 1
+        return len_subsequence
+```
