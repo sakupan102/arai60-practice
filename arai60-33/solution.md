@@ -42,6 +42,8 @@ targetが昇順に並んでいる側の範囲にあればそちらを見に行�
   - pivot_indexによってtargetが右にあるか左にあるか決まる
 
 二分探索を二回行った解法
+- https://github.com/shining-ai/leetcode/pull/43/files
+  - find_pivotの引数は無くてもよかったかも
 ```py
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
