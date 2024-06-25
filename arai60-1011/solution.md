@@ -25,6 +25,8 @@ class Solution:
 ```
 # 2nd
 - https://github.com/hayashi-ay/leetcode/pull/55/files
+- https://github.com/SuperHotDogCat/coding-interview/pull/27/files
+- https://github.com/shining-ai/leetcode/pull/44
   - 1stの変数`day`はあまりよくないかも、これを参考に`needed_days`とかにした方がよさそう
 ```py
 class Solution:
